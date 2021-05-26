@@ -1,12 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Cryptocracy</string>
     <string name="msg_token_fmt">msg_token</string>
-    <string name="inr">INR</string>
     <string name="select_currency">Select Currency</string>
     <string name="currency_changed">Currency changed successfully !!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="market">Market</string>
     <string name="favourite">Favourite</string>
     <string name="exchanges">Exchanges</string>
 </resources>

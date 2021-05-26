@@ -1,4 +1,4 @@
-package com.e.cryptocracy.Utils;
+package com.e.cryptocracy.utils;
 
 import android.app.Application;
 import android.content.Context;
@@ -10,6 +10,6 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        context=this;
+        context = this;
     }
 }
