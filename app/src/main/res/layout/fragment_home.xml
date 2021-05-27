@@ -21,61 +21,101 @@
             android:id="@+id/tvCurrency"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
             android:padding="5dp"
-            android:text="INR"
+            android:textAllCaps="true"
             android:textColor="@color/TextPrimaryColor"
             android:textSize="17sp" />
 
         <ImageView
+            android:id="@+id/ivFilter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
             android:padding="5dp"
             android:src="@drawable/ic_baseline_sort_24" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
             android:padding="5dp"
             android:src="@drawable/ic_baseline_search_24" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
             android:padding="5dp"
             android:src="@drawable/ic_baseline_more_vert_24" />
 
     </LinearLayout>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
+        <com.google.android.material.tabs.TabLayout
+            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/market" />
+            app:tabGravity="start"
+            app:tabMode="scrollable"
+            app:tabIndicatorGravity="stretch"
+            app:tabIndicatorColor="@color/purple_200"
+            app:tabIndicator="@drawable/tab_layout_fg"
+            app:tabSelectedTextColor="@color/white"
+            tools:layout_editor_absoluteY="56dp">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/favourite" />
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/market" />
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/exchanges" />
-    </com.google.android.material.tabs.TabLayout>
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/favourite" />
 
-    <androidx.viewpager2.widget.ViewPager2
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/exchanges" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/events" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/derivations" />
+        </com.google.android.material.tabs.TabLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

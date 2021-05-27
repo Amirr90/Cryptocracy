@@ -5,4 +5,6 @@
     <string name="currency_changed">Currency changed successfully !!</string>
     <string name="favourite">Favourite</string>
     <string name="exchanges">Exchanges</string>
+    <string name="events">Events</string>
+    <string name="derivations">Derivations</string>
 </resources>

@@ -70,7 +70,7 @@ class SplashScreen : AppCompatActivity() {
                 try {
                     AppUtils.updateUserInfo(user)
                     AppUtils.setValue(AppConstant.CURRENCY, Currency.USD, this)
-                    AppUtils.setValue(AppConstant.SORT_ORDER, SortOrder.market_cap_asc, this)
+                    AppUtils.setValue(AppConstant.SORT_ORDER, SortOrder.market_cap_desc, this)
                     startActivity(Intent(this, SelectCurrencyActivity::class.java))
                     finish()
                 } catch (ex: Exception) {

@@ -3,6 +3,7 @@ package com.e.cryptocracy.utils;
 import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class AppConstant {
     public static final int RC_SIGN_IN = 1;
@@ -16,6 +17,8 @@ public class AppConstant {
     public static final String CURRENCY = "currency";
     public static final String SORT_ORDER = "sort_order";
     public static final String TIMESTAMP = "timestamp";
+    @Nullable
+    public static final String CATEGORY = "category";
 
     public static void showToast(@NotNull String s) {
         Toast.makeText(App.context, s, Toast.LENGTH_SHORT).show();

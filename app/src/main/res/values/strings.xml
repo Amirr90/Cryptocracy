@@ -9,4 +9,6 @@
     <string name="market">Market</string>
     <string name="favourite">Favourite</string>
     <string name="exchanges">Exchanges</string>
+    <string name="events">Events</string>
+    <string name="derivations">Derivations</string>
 </resources>
