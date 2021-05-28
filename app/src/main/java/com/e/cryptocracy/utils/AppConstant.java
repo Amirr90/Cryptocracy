@@ -19,6 +19,10 @@ public class AppConstant {
     public static final String TIMESTAMP = "timestamp";
     @Nullable
     public static final String CATEGORY = "category";
+    @Nullable
+    public static final String COIN_ID = "coin_id";
+    @Nullable
+    public static final String PRICE="price";
 
     public static void showToast(@NotNull String s) {
         Toast.makeText(App.context, s, Toast.LENGTH_SHORT).show();

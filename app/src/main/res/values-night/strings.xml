@@ -4,7 +4,11 @@
     <string name="select_currency">Select Currency</string>
     <string name="currency_changed">Currency changed successfully !!</string>
     <string name="favourite">Favourite</string>
-    <string name="exchanges">Exchanges</string>
-    <string name="events">Events</string>
     <string name="derivations">Derivations</string>
+    <string name="try_again">Try again !!</string>
+    <string name="price_chart">Price Chart</string>
+    <string name="exchanges">Exchanges</string>
+    <string name="portfolio">Portfolio</string>
+    <string name="info">Info</string>
+    <string name="events">Events</string>
 </resources>

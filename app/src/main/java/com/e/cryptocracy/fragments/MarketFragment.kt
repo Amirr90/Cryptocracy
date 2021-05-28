@@ -11,26 +11,27 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.e.cryptocracy.R
 import com.e.cryptocracy.adapter.MarketAdapter
 import com.e.cryptocracy.databinding.FragmentMarketBinding
 import com.e.cryptocracy.interfaces.AdapterInterface
 import com.e.cryptocracy.model.MarketModel
 import com.e.cryptocracy.utils.App
+import com.e.cryptocracy.utils.AppConstant
 import com.e.cryptocracy.viewModel.MyViewModel
 
 class MarketFragment : Fragment(), AdapterInterface {
     private val TAG = "MarketFragment"
 
 
-    private lateinit var binding: FragmentMarketBinding
+    lateinit var binding: FragmentMarketBinding
     lateinit var navController: NavController
     var viewModel: MyViewModel? = null
-    lateinit var coinAdapter: MarketAdapter
     var coinList: List<MarketModel> = ArrayList()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
 
         binding = FragmentMarketBinding.inflate(layoutInflater)
@@ -40,25 +41,22 @@ class MarketFragment : Fragment(), AdapterInterface {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+
         viewModel = ViewModelProvider(requireActivity())[MyViewModel::class.java]
-        setupMarketRec()
+
+        setupMarketRec(1, "")
     }
 
-    private fun setupMarketRec() {
-
-
-        var id = ""
-        var page = 1
+    fun setupMarketRec(page: Int, id: String) {
+        Log.d(TAG, "setupMarketRec: ")
         viewModel?.getCoinData(id, page, requireActivity())
             ?.observe(viewLifecycleOwner) { coinDataList ->
+                Log.d(TAG, "setupMarketRec: ")
                 if (coinDataList != null) {
                     for (element in coinDataList) {
                         coinList += element
-                        Log.d(TAG, "currency: $coinList")
                     }
 
-
-                    coinAdapter = MarketAdapter(coinList, this)
                     binding.recMarket.addItemDecoration(
                         DividerItemDecoration(
 
@@ -66,15 +64,21 @@ class MarketFragment : Fragment(), AdapterInterface {
                             LinearLayoutManager.VERTICAL
                         )
                     )
-                    binding.recMarket.adapter = coinAdapter
+                    binding.recMarket.adapter = MarketAdapter(coinList, this)
 
-                    Log.d(TAG, "setupMarketRec: $coinDataList")
+                    Log.d(TAG, "setupMarketRec: getCoinData not null")
                 }
             }
     }
 
     override fun onItemClick(obj: Any) {
-        Log.d(TAG, "onItemClick: $obj")
+        val coinModel = obj as MarketModel
+        Log.d(TAG, "onItemClick: $coinModel")
+        val bundle = Bundle()
+        bundle.putString(AppConstant.COIN_ID, coinModel.id)
+        bundle.putDouble(AppConstant.PRICE, coinModel.current_price)
+        navController.navigate(R.id.action_homeFragment_to_coinDetailFragment, bundle)
     }
+
 
 }

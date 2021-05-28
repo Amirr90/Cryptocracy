@@ -8,6 +8,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+       android:padding="5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/market_view"
         android:id="@+id/recMarket"

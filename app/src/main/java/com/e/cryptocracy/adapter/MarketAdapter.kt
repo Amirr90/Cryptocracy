@@ -10,7 +10,7 @@ import com.e.cryptocracy.model.MarketModel
 
 class MarketAdapter(
     private val dataList: List<MarketModel>,
-    private val adapterInterface: AdapterInterface
+    private val adapterInterface: AdapterInterface,
 ) :
     RecyclerView.Adapter<MarketAdapter.HomeVH>() {
 
@@ -30,6 +30,10 @@ class MarketAdapter(
 
         holder.binding.coinModel = dataList[position]
         holder.binding.position = (position + 1).toString()
+
+        holder.binding.mainCoinsLayout.setOnClickListener {
+            adapterInterface.onItemClick(dataList[position])
+        }
     }
 
 }

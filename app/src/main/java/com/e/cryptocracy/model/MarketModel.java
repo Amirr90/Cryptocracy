@@ -147,4 +147,39 @@ public class MarketModel {
     public double getPrice_change_percentage_7d_in_currency() {
         return price_change_percentage_7d_in_currency;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id='" + id + '\'' +
+                ", symbol='" + symbol + '\'' +
+                ", name='" + name + '\'' +
+                ", image='" + image + '\'' +
+                ", current_price=" + current_price +
+                ", market_cap=" + market_cap +
+                ", market_cap_rank=" + market_cap_rank +
+                ", fully_diluted_valuation=" + fully_diluted_valuation +
+                ", total_volume=" + total_volume +
+                ", high_24h=" + high_24h +
+                ", low_24h=" + low_24h +
+                ", price_change_24h=" + price_change_24h +
+                ", price_change_percentage_24h=" + price_change_percentage_24h +
+                ", market_cap_change_24h=" + market_cap_change_24h +
+                ", market_cap_change_percentage_24h=" + market_cap_change_percentage_24h +
+                ", circulating_supply=" + circulating_supply +
+                ", total_supply=" + total_supply +
+                ", max_supply=" + max_supply +
+                ", ath=" + ath +
+                ", ath_change_percentage=" + ath_change_percentage +
+                ", ath_date='" + ath_date + '\'' +
+                ", atl=" + atl +
+                ", atl_change_percentage=" + atl_change_percentage +
+                ", atl_date='" + atl_date + '\'' +
+                ", roi=" + roi +
+                ", last_updated='" + last_updated + '\'' +
+                ", price_change_percentage_1h_in_currency=" + price_change_percentage_1h_in_currency +
+                ", price_change_percentage_24h_in_currency=" + price_change_percentage_24h_in_currency +
+                ", price_change_percentage_7d_in_currency=" + price_change_percentage_7d_in_currency +
+                '}';
+    }
 }

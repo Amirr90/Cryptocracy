@@ -14,14 +14,12 @@ class Repo {
     fun getCoinData(
         id: String?,
         page: Int?,
-        activity: Activity?
+        activity: Activity?,
     ): MutableLiveData<List<MarketModel>>? {
 
         if (marketLiveData == null) {
             marketLiveData = MutableLiveData<List<MarketModel>>()
         }
-
-
         loadCoinData(id, page, activity)
         return marketLiveData
     }
