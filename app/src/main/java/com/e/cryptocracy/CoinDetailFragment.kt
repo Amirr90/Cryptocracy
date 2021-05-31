@@ -24,7 +24,7 @@ class CoinDetailFragment : Fragment() {
     private val TAG = "CoinDetailFragment"
 
     lateinit var binding: FragmentCoinDetailBinding
-    lateinit var navController: NavController
+    private lateinit var navController: NavController
     lateinit var id: String
     var price by Delegates.notNull<Double>()
     override fun onCreateView(
@@ -43,7 +43,10 @@ class CoinDetailFragment : Fragment() {
         id = arguments?.getString(AppConstant.COIN_ID).toString()
         price = arguments?.getDouble(AppConstant.PRICE)!!
 
-        setupFragments();
+        (requireActivity() as AppCompatActivity).supportActionBar?.title =
+            arguments?.getString(AppConstant.COIN_NAME).toString()
+
+        setupFragments()
     }
 
     private fun setupFragments() {
@@ -64,7 +67,7 @@ class CoinDetailFragment : Fragment() {
         val adapter =
             MyAdapter(
                 requireContext(),
-                requireActivity().supportFragmentManager,
+                this@CoinDetailFragment.childFragmentManager,
                 id, price
             )
         binding.coinViewPager.adapter = adapter
@@ -136,4 +139,5 @@ class CoinDetailFragment : Fragment() {
                 )
         }
     }
+
 }

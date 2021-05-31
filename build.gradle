@@ -21,6 +21,9 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url = "https://highsoft.bintray.com/Highcharts"
+        }
         google()
         jcenter()
     }

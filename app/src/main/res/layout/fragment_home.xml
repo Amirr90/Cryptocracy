@@ -77,9 +77,9 @@
             app:tabGravity="start"
             app:tabMode="scrollable"
             app:tabIndicatorGravity="stretch"
-            app:tabIndicatorColor="@color/purple_200"
+            app:tabIndicatorColor="@color/colorSecondary"
             app:tabIndicator="@drawable/tab_layout_fg"
-            app:tabSelectedTextColor="@color/white"
+            app:tabSelectedTextColor="@color/TextPrimaryColor"
             tools:layout_editor_absoluteY="56dp">
 
             <com.google.android.material.tabs.TabItem

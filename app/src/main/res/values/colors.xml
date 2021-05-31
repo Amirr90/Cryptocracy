@@ -10,4 +10,15 @@
 
     <color name="TextPrimaryColor">#262e3f</color>
     <color name="TextSecondaryColor">#3f4e6e</color>
+
+
+    <color name="colorPrimary">#344955</color>
+    <color name="colorPrimaryVariant">#232F34</color>
+    <color name="colorOnPrimary">#4A6572</color>
+
+    <color name="colorSecondary">#F9AA33</color>
+
+
+
+
 </resources>

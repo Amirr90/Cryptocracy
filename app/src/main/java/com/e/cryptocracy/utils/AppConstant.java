@@ -22,7 +22,12 @@ public class AppConstant {
     @Nullable
     public static final String COIN_ID = "coin_id";
     @Nullable
-    public static final String PRICE="price";
+    public static final String PRICE = "price";
+    public static final int PER_PAGE_COINS_DATA = 200;
+    @Nullable
+    public static final String COIN_NAME = "name";
+    @Nullable
+    public static final String COIN_SYMBOL = "symbol";
 
     public static void showToast(@NotNull String s) {
         Toast.makeText(App.context, s, Toast.LENGTH_SHORT).show();

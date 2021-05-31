@@ -11,4 +11,5 @@
     <string name="portfolio">Portfolio</string>
     <string name="info">Info</string>
     <string name="events">Events</string>
+    <string name="no_internet">no internet connection !!</string>
 </resources>

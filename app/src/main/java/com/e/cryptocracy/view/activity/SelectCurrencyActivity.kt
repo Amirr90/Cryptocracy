@@ -45,31 +45,37 @@ class SelectCurrencyActivity : AppCompatActivity(), AdapterInterface {
 
 
     private fun getCurrencyData() {
-        apiUtils.getAllCurrency(object : ApiCallbackInterface {
-            override fun onSuccess(obj: Any) {
-                val currencyList: ArrayList<String> = obj as ArrayList<String>
-                for (a in 0 until currencyList.size) {
-                    val currencyItem = CurrencyItem(currencyList[a])
-                    dummyData += CurrencyItem(currencyList[a])
-                    Log.d(TAG, "currency: ${currencyItem.currencyId}")
-                }
-                currencyAdapter = CurrencyAdapter(dummyData, this@SelectCurrencyActivity)
-                binding.recCurreency.addItemDecoration(
-                    DividerItemDecoration(
 
-                        context,
-                        LinearLayoutManager.VERTICAL
+        if (AppUtils.isNetworkConnected(App.context)) {
+            AppUtils.showRequestDialog(this)
+            apiUtils.getAllCurrency(object : ApiCallbackInterface {
+                override fun onSuccess(obj: Any) {
+                    AppUtils.hideDialog()
+                    val currencyList: ArrayList<String> = obj as ArrayList<String>
+                    for (a in 0 until currencyList.size) {
+                        val currencyItem = CurrencyItem(currencyList[a])
+                        dummyData += CurrencyItem(currencyList[a])
+                        Log.d(TAG, "currency: ${currencyItem.currencyId}")
+                    }
+                    currencyAdapter = CurrencyAdapter(dummyData, this@SelectCurrencyActivity)
+                    binding.recCurreency.addItemDecoration(
+                        DividerItemDecoration(
+
+                            context,
+                            LinearLayoutManager.VERTICAL
+                        )
                     )
-                )
-                binding.recCurreency.adapter = currencyAdapter
+                    binding.recCurreency.adapter = currencyAdapter
 
-            }
+                }
 
-            override fun onFailed(msg: String) {
-                Log.d(TAG, "onFailed: $msg")
-            }
+                override fun onFailed(msg: String) {
+                    AppUtils.hideDialog()
+                    Log.d(TAG, "onFailed: $msg")
+                }
 
-        })
+            })
+        } else AppConstant.showToast(getString(R.string.no_internet))
 
     }
 

@@ -1,6 +1,8 @@
 package com.e.cryptocracy.interfaces;
 
 import com.e.cryptocracy.model.CoinModel;
+import com.e.cryptocracy.model.CountryList;
+import com.e.cryptocracy.model.ExchangeModel;
 import com.e.cryptocracy.model.MarketModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -43,4 +45,18 @@ public interface API {
                                     @Query("community_data") @Nullable Boolean community_data,
                                     @Query("developer_data") @Nullable Boolean developer_data,
                                     @Query("sparkline") @Nullable Boolean sparkline);
+
+    @GET("api/v3/coins/{id}/ohlc")
+    Call<ArrayList<ArrayList<String>>> get_OHLC_Data(@Path("id") @NotNull String id,
+                                                     @Query("days") @NotNull String duration,
+                                                     @Query("vs_currency") @Nullable String days);
+
+    @GET("api/v3/exchanges")
+    Call<List<ExchangeModel>> getExchangeData(
+            @Query("per_page") @NotNull String per_page,
+            @Query("page") @NotNull String page
+    );
+
+    @GET("api/v3/events/countries")
+    Call<CountryList>countries();
 }

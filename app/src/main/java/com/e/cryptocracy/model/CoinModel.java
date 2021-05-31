@@ -1,5 +1,7 @@
 package com.e.cryptocracy.model;
 
+import android.media.Image;
+
 public class CoinModel {
     String id;
     String symbol;
@@ -8,6 +10,11 @@ public class CoinModel {
     String market_cap_rank;
     String coingecko_rank;
     MarketData market_data;
+    Images image;
+
+    public Images getImage() {
+        return image;
+    }
 
     public MarketData getMarket_data() {
         return market_data;
@@ -105,5 +112,23 @@ public class CoinModel {
                 ", market_cap_rank='" + market_cap_rank + '\'' +
                 ", coingecko_rank='" + coingecko_rank + '\'' +
                 '}';
+    }
+
+    public class Images{
+        String thumb;
+        String small;
+        String large;
+
+        public String getThumb() {
+            return thumb;
+        }
+
+        public String getSmall() {
+            return small;
+        }
+
+        public String getLarge() {
+            return large;
+        }
     }
 }

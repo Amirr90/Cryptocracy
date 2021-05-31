@@ -50,7 +50,6 @@ class HomeFragment : Fragment() {
         setUpViewPager()
 
 
-
         AppUtils.updateCurrency(binding.tvCurrency, requireActivity())
 
         binding.tvCurrency.setOnClickListener {
@@ -101,7 +100,7 @@ class HomeFragment : Fragment() {
         val adapter =
             MyAdapter(
                 requireContext(),
-                requireActivity().supportFragmentManager,
+                this@HomeFragment.childFragmentManager,
                 binding.tabLayout.tabCount
             )
         binding.viewPager.adapter = adapter

@@ -1,60 +1,75 @@
 package com.e.cryptocracy.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.e.cryptocracy.R
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.e.cryptocracy.adapter.EventsAdapter
+import com.e.cryptocracy.databinding.FragmentEventsBinding
+import com.e.cryptocracy.interfaces.AdapterInterface
+import com.e.cryptocracy.interfaces.ApiCallbackInterface
+import com.e.cryptocracy.model.CountryList
+import com.e.cryptocracy.model.ExchangeModel
+import com.e.cryptocracy.utils.APIUtils
+import com.e.cryptocracy.utils.AppUtils
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class EventsFragment : Fragment(), AdapterInterface {
+    private val TAG = "EventsFragment"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [EventsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class EventsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    lateinit var binder: FragmentEventsBinding
+    lateinit var navController: NavController
+    lateinit var adapter: EventsAdapter
+    private val utilsLight = APIUtils()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_events, container, false)
+        binder = FragmentEventsBinding.inflate(layoutInflater)
+        return binder.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EventsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EventsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
+
+        getCountryData()
+        initRec()
+    }
+
+    private fun getCountryData() {
+        utilsLight.getCountryList(object : ApiCallbackInterface {
+            override fun onSuccess(obj: Any) {
+                AppUtils.hideDialog()
+                val exchangeList = obj as CountryList
+                Log.d(TAG, "onSuccess: " + exchangeList.data[1].country)
+                //adapter.addItems(exchangeList)
             }
+
+            override fun onFailed(msg: String) {
+
+            }
+
+        })
+    }
+
+
+    private fun initRec() {
+        adapter = EventsAdapter(this)
+        binder.recEvents.adapter = adapter
+
+        getData("1")
+    }
+
+    private fun getData(page: String) {
+
+
+    }
+
+    override fun onItemClick(obj: Any) {
+
     }
 }

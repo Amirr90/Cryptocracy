@@ -33,6 +33,15 @@ class HomeScreen : AppCompatActivity() {
 
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        try {
+            AppUtils.hideSoftKeyboard(this)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return navController.navigateUp()
+    }
+
     private fun logout() {
         AuthUI.getInstance()
             .signOut(this)

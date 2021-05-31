@@ -9,7 +9,7 @@ import com.e.cryptocracy.model.MarketModel
 
 
 class MarketAdapter(
-    private val dataList: List<MarketModel>,
+    private var dataList: List<MarketModel>,
     private val adapterInterface: AdapterInterface,
 ) :
     RecyclerView.Adapter<MarketAdapter.HomeVH>() {
@@ -22,6 +22,19 @@ class MarketAdapter(
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
         val binding: MarketViewBinding = MarketViewBinding.inflate(inflater, parent, false)
         return HomeVH(binding)
+    }
+
+
+    fun addItem(item: MarketModel) {
+        if (null == dataList)
+            dataList = ArrayList()
+        dataList += item
+        notifyDataSetChanged()
+    }
+
+    fun addItems(list: List<MarketModel>) {
+        dataList = list
+        notifyDataSetChanged()
     }
 
     override fun getItemCount() = dataList.size

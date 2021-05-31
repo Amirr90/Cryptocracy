@@ -41,7 +41,6 @@
     <fragment
         android:id="@+id/coinDetailFragment"
         android:name="com.e.cryptocracy.CoinDetailFragment"
-        android:label="fragment_coin_detail"
         tools:layout="@layout/fragment_coin_detail" >
         <argument
             android:name="coinId"
