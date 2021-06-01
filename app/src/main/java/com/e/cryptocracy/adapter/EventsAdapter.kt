@@ -1,40 +1,45 @@
 package com.e.cryptocracy.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.e.cryptocracy.databinding.ExchangeViewBinding
+import com.e.cryptocracy.databinding.EventViewBinding
 import com.e.cryptocracy.interfaces.AdapterInterface
-import com.e.cryptocracy.model.ExchangeModel
+import com.e.cryptocracy.model.responseModel.EventResponse
 
 
 class EventsAdapter(
 
-    private val adapterInterface: AdapterInterface,
+
+            private
+            val adapterInterface: AdapterInterface,
 ) :
     RecyclerView.Adapter<EventsAdapter.HomeVH>() {
 
-    private var dataList: List<ExchangeModel> = ArrayList()
+    private  val TAG = "EventsAdapter"
+    private var dataList: List<EventResponse.Event> = ArrayList()
 
-    class HomeVH(itemView: ExchangeViewBinding) : RecyclerView.ViewHolder(itemView.root) {
-        val binding: ExchangeViewBinding = itemView
+    class HomeVH(itemView: EventViewBinding) : RecyclerView.ViewHolder(itemView.root) {
+        val binding: EventViewBinding = itemView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeVH {
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val binding: ExchangeViewBinding = ExchangeViewBinding.inflate(inflater, parent, false)
+        val binding: EventViewBinding = EventViewBinding.inflate(inflater, parent, false)
         return HomeVH(binding)
     }
 
 
-    fun addItem(item: ExchangeModel) {
+    fun addItem(item: EventResponse.Event) {
         if (null == dataList)
             dataList = ArrayList()
         dataList += item
         notifyDataSetChanged()
     }
 
-    fun addItems(list: List<ExchangeModel>) {
+    fun addItems(list: List<EventResponse.Event>) {
+        Log.d(TAG, "addItems: $list")
         dataList = list
         notifyDataSetChanged()
     }
@@ -46,12 +51,12 @@ class EventsAdapter(
 
     override fun onBindViewHolder(holder: HomeVH, position: Int) {
 
-        val exchangeModel = dataList[position]
-        exchangeModel.position = (position + 1).toString()
-        holder.binding.exchange = exchangeModel
+        val eventModel = dataList[position]
+        //eventModel.position = (position + 1).toString()
+        holder.binding.event = eventModel
 
 
-        holder.binding.mainExchangeView.setOnClickListener {
+        holder.binding.mailEventLay.setOnClickListener {
             adapterInterface.onItemClick(dataList[position])
         }
     }

@@ -2,8 +2,10 @@ package com.e.cryptocracy.interfaces;
 
 import com.e.cryptocracy.model.CoinModel;
 import com.e.cryptocracy.model.CountryList;
+import com.e.cryptocracy.model.EventTypeModel;
 import com.e.cryptocracy.model.ExchangeModel;
 import com.e.cryptocracy.model.MarketModel;
+import com.e.cryptocracy.model.responseModel.EventResponse;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,5 +60,29 @@ public interface API {
     );
 
     @GET("api/v3/events/countries")
-    Call<CountryList>countries();
+    Call<CountryList> countries();
+
+    @GET("api/v3/events/types")
+    Call<EventTypeModel> getEventData();
+
+
+    @GET("api/v3/events")
+    Call<EventTypeModel> getEventData(
+            @Query("country_code") @Nullable String countryCode,
+            @Query("type") @Nullable String type,
+            @Query("page") int perPage,
+            @Query("upcoming_events_only") boolean upcomingEventsOnly,
+            @Query("from_date") @NotNull String fromDate,
+            @Query("to_date") @NotNull String toDate);
+
+
+    @GET("api/v3/events")
+    Call<EventResponse> getEventData(
+            @Query("country_code") @Nullable String countryCode,
+            @Query("type") @Nullable String type,
+            @Query("page") int perPage,
+            @Query("upcoming_events_only") boolean upcomingEventsOnly);
+
 }
+
+

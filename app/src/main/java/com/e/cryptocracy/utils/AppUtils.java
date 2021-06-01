@@ -44,6 +44,7 @@ public class AppUtils {
     private static final String MY_PREFS_NAME = "my_prefs";
     static ProgressDialog progressDialog;
 
+
     public static Animation fadeIn(Activity activity) {
         return AnimationUtils.loadAnimation(activity, R.anim.fade_in);
     }

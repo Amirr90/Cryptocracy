@@ -3,10 +3,8 @@ package com.e.cryptocracy.utils
 import android.app.Activity
 import android.util.Log
 import com.e.cryptocracy.interfaces.ApiCallbackInterface
-import com.e.cryptocracy.model.CoinModel
-import com.e.cryptocracy.model.CountryList
-import com.e.cryptocracy.model.ExchangeModel
-import com.e.cryptocracy.model.MarketModel
+import com.e.cryptocracy.model.*
+import com.e.cryptocracy.model.responseModel.EventResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -178,6 +176,68 @@ class APIUtils {
                 }
 
                 override fun onFailure(call: Call<CountryList>, t: Throwable) {
+                    apiCallbackInterface.onFailed(t.localizedMessage)
+                    Log.d(TAG, "onFailure: " + t.localizedMessage)
+                }
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun getEventType(apiCallbackInterface: ApiCallbackInterface) {
+        try {
+            val api = URLUtils.getAPIService()
+            val specialityResCall =
+                api.eventData
+            specialityResCall.enqueue(object : Callback<EventTypeModel> {
+                override fun onResponse(
+                    call: Call<EventTypeModel>,
+                    response: Response<EventTypeModel>,
+                ) {
+                    if (response.code() == 200) {
+                        if (null != response.body()) apiCallbackInterface.onSuccess(response.body()!!)
+                        Log.d(TAG, "onResponse: " + response.body())
+                    }
+                }
+
+                override fun onFailure(call: Call<EventTypeModel>, t: Throwable) {
+                    apiCallbackInterface.onFailed(t.localizedMessage)
+                    Log.d(TAG, "onFailure: " + t.localizedMessage)
+                }
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+
+    fun getEventData(page: Int, apiCallbackInterface: ApiCallbackInterface) {
+        try {
+
+            val type = AppUtils.getValue(AppConstant.EVENT_TYPE, App.context)
+            val country_code = AppUtils.getValue(AppConstant.EVENT_COUNTRY_CODE, App.context)
+            val upcoming_events_only = false
+            val from_date = ""
+            val to_date = ""
+            val api = URLUtils.getAPIService()
+            val specialityResCall =
+                api.getEventData(country_code,
+                    type,
+                    page,
+                    upcoming_events_only)
+            specialityResCall.enqueue(object : Callback<EventResponse> {
+                override fun onResponse(
+                    call: Call<EventResponse>,
+                    response: Response<EventResponse>,
+                ) {
+                    if (response.code() == 200) {
+                        if (null != response.body()) apiCallbackInterface.onSuccess(response.body()!!)
+                        Log.d(TAG, "onResponse: " + response.body())
+                    }
+                }
+
+                override fun onFailure(call: Call<EventResponse>, t: Throwable) {
                     apiCallbackInterface.onFailed(t.localizedMessage)
                     Log.d(TAG, "onFailure: " + t.localizedMessage)
                 }

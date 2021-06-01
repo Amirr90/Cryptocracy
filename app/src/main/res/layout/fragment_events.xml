@@ -11,16 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingTop="20sp"
+        tools:listitem="@layout/event_view"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView28"
+        app:layout_constraintTop_toBottomOf="@+id/tvCountry"
         tools:itemCount="5" />
 
 
     <TextView
-        android:id="@+id/textView28"
-        android:layout_width="0dp"
+        android:id="@+id/tvCountry"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:background="?attr/selectableItemBackground"
@@ -30,15 +32,18 @@
         android:fontFamily="@font/poppins"
         android:gravity="center_vertical"
         android:padding="10dp"
+        android:drawableTint="@color/colorSecondary"
         android:text="United Arab Emirates"
-        android:textColor="@color/TextPrimaryColor"
+        android:textColor="@color/colorSecondary"
         app:drawableLeftCompat="@drawable/ic_baseline_flag_24"
-        app:layout_constraintEnd_toStartOf="@+id/textView29"
+        app:drawableRightCompat="@drawable/ic_baseline_arrow_drop_down_24"
+        app:layout_constraintEnd_toStartOf="@+id/tvEvent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView29"
+        android:id="@+id/tvEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
@@ -49,8 +54,10 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="Conference"
-        android:textColor="@color/TextPrimaryColor"
-        app:drawableRightCompat="@drawable/ic_baseline_event_24"
+        android:textColor="@color/colorSecondary"
+        app:drawableRightCompat="@drawable/ic_baseline_arrow_drop_down_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:drawableTint="@color/colorSecondary" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,8 +28,29 @@ public class AppConstant {
     public static final String COIN_NAME = "name";
     @Nullable
     public static final String COIN_SYMBOL = "symbol";
+    @Nullable
+    public static final String EVENT_COUNTRY = "event_country";
+    @Nullable
+    public static final String US = "US";
+    @Nullable
+    public static final String UNITED_STATE = "United States";
+    @Nullable
+    public static final String EVENT_COUNTRY_CODE = "event_country_code";
+    @Nullable
+    public static final String EVENT_TYPE = "event_type";
+    @Nullable
+    public static final String EVENT = "Event";
 
     public static void showToast(@NotNull String s) {
         Toast.makeText(App.context, s, Toast.LENGTH_SHORT).show();
+    }
+
+    public class EventType {
+        @Nullable
+        public static final String EVENT = "Event";
+        @Nullable
+        public static final String CONFERENCE = "Conference";
+        @Nullable
+        public static final String MEETUP = "Meetup";
     }
 }
