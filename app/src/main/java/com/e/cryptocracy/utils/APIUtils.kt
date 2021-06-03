@@ -5,6 +5,7 @@ import android.util.Log
 import com.e.cryptocracy.interfaces.ApiCallbackInterface
 import com.e.cryptocracy.model.*
 import com.e.cryptocracy.model.responseModel.EventResponse
+import com.e.cryptocracy.model.responseModel.TrendingCoinResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -38,19 +39,19 @@ class APIUtils {
     fun getMarketData(
         id: String?,
         page: Int?,
-        activity: Activity?,
         apiCallbackInterface: ApiCallbackInterface,
     ) {
         try {
             val price_change_percentage = "1h,24h,7d"
             val per_page = AppConstant.PER_PAGE_COINS_DATA
-            val order: String = AppUtils.getValue(AppConstant.SORT_ORDER, activity)
-            val vs_currency: String = AppUtils.getValue(AppConstant.CURRENCY, activity)
-            var category: String = AppUtils.getValue(AppConstant.CATEGORY, activity)
+            val order: String = AppUtils.getValue(AppConstant.SORT_ORDER, App.context)
+            val vs_currency: String = AppUtils.getValue(AppConstant.CURRENCY, App.context)
+            //var category: String = AppUtils.getValue(AppConstant.CATEGORY, activity)
 
             val api = URLUtils.getAPIService()
             val specialityResCall = api.coinMarketData(
                 vs_currency,
+                id,
                 order,
                 per_page,
                 page,
@@ -218,8 +219,8 @@ class APIUtils {
             val type = AppUtils.getValue(AppConstant.EVENT_TYPE, App.context)
             val country_code = AppUtils.getValue(AppConstant.EVENT_COUNTRY_CODE, App.context)
             val upcoming_events_only = false
-            val from_date = ""
-            val to_date = ""
+         /*   val from_date = ""
+            val to_date = ""*/
             val api = URLUtils.getAPIService()
             val specialityResCall =
                 api.getEventData(country_code,
@@ -238,6 +239,61 @@ class APIUtils {
                 }
 
                 override fun onFailure(call: Call<EventResponse>, t: Throwable) {
+                    apiCallbackInterface.onFailed(t.localizedMessage)
+                    Log.d(TAG, "onFailure: " + t.localizedMessage)
+                }
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun derivativeData(includeTickers: String, apiCallbackInterface: ApiCallbackInterface) {
+        try {
+
+
+            val api = URLUtils.getAPIService()
+            val specialityResCall =
+                api.derivativeData(includeTickers)
+            specialityResCall.enqueue(object : Callback<List<DerivativeModel>> {
+                override fun onResponse(
+                    call: Call<List<DerivativeModel>>,
+                    response: Response<List<DerivativeModel>>,
+                ) {
+                    if (response.code() == 200) {
+                        if (null != response.body()) apiCallbackInterface.onSuccess(response.body()!!)
+                        Log.d(TAG, "onResponse: " + response.body())
+                    }
+                }
+
+                override fun onFailure(call: Call<List<DerivativeModel>>, t: Throwable) {
+                    apiCallbackInterface.onFailed(t.localizedMessage)
+                    Log.d(TAG, "onFailure: " + t.localizedMessage)
+                }
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun loadTendingCoinData(apiCallbackInterface: ApiCallbackInterface) {
+        try {
+
+            val api = URLUtils.getAPIService()
+            val specialityResCall =
+                api.loadTendingCoinData()
+            specialityResCall.enqueue(object : Callback<TrendingCoinResponse> {
+                override fun onResponse(
+                    call: Call<TrendingCoinResponse>,
+                    response: Response<TrendingCoinResponse>,
+                ) {
+                    if (response.code() == 200) {
+                        if (null != response.body()) apiCallbackInterface.onSuccess(response.body()!!)
+                        Log.d(TAG, "onResponse: " + response.body())
+                    }
+                }
+
+                override fun onFailure(call: Call<TrendingCoinResponse>, t: Throwable) {
                     apiCallbackInterface.onFailed(t.localizedMessage)
                     Log.d(TAG, "onFailure: " + t.localizedMessage)
                 }

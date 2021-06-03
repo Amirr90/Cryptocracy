@@ -1,5 +1,10 @@
 package com.e.cryptocracy.model;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+
+import java.util.Objects;
+
 public class MarketModel {
     private String id;
     private String symbol;
@@ -7,7 +12,7 @@ public class MarketModel {
     private String image;
     private double current_price;
     private double market_cap;
-    private double market_cap_rank;
+    private int market_cap_rank;
     private double fully_diluted_valuation;
     private double total_volume;
     private double high_24h;
@@ -56,7 +61,7 @@ public class MarketModel {
         return market_cap;
     }
 
-    public double getMarket_cap_rank() {
+    public int getMarket_cap_rank() {
         return market_cap_rank;
     }
 
@@ -149,37 +154,56 @@ public class MarketModel {
     }
 
     @Override
-    public String toString() {
-        return "{" +
-                "id='" + id + '\'' +
-                ", symbol='" + symbol + '\'' +
-                ", name='" + name + '\'' +
-                ", image='" + image + '\'' +
-                ", current_price=" + current_price +
-                ", market_cap=" + market_cap +
-                ", market_cap_rank=" + market_cap_rank +
-                ", fully_diluted_valuation=" + fully_diluted_valuation +
-                ", total_volume=" + total_volume +
-                ", high_24h=" + high_24h +
-                ", low_24h=" + low_24h +
-                ", price_change_24h=" + price_change_24h +
-                ", price_change_percentage_24h=" + price_change_percentage_24h +
-                ", market_cap_change_24h=" + market_cap_change_24h +
-                ", market_cap_change_percentage_24h=" + market_cap_change_percentage_24h +
-                ", circulating_supply=" + circulating_supply +
-                ", total_supply=" + total_supply +
-                ", max_supply=" + max_supply +
-                ", ath=" + ath +
-                ", ath_change_percentage=" + ath_change_percentage +
-                ", ath_date='" + ath_date + '\'' +
-                ", atl=" + atl +
-                ", atl_change_percentage=" + atl_change_percentage +
-                ", atl_date='" + atl_date + '\'' +
-                ", roi=" + roi +
-                ", last_updated='" + last_updated + '\'' +
-                ", price_change_percentage_1h_in_currency=" + price_change_percentage_1h_in_currency +
-                ", price_change_percentage_24h_in_currency=" + price_change_percentage_24h_in_currency +
-                ", price_change_percentage_7d_in_currency=" + price_change_percentage_7d_in_currency +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MarketModel that = (MarketModel) o;
+        return Double.compare(that.current_price, current_price) == 0 &&
+                Double.compare(that.market_cap, market_cap) == 0 &&
+                market_cap_rank == that.market_cap_rank &&
+                Double.compare(that.fully_diluted_valuation, fully_diluted_valuation) == 0 &&
+                Double.compare(that.total_volume, total_volume) == 0 &&
+                Double.compare(that.high_24h, high_24h) == 0 &&
+                Double.compare(that.low_24h, low_24h) == 0 &&
+                Double.compare(that.price_change_24h, price_change_24h) == 0 &&
+                Double.compare(that.price_change_percentage_24h, price_change_percentage_24h) == 0 &&
+                Double.compare(that.market_cap_change_24h, market_cap_change_24h) == 0 &&
+                Double.compare(that.market_cap_change_percentage_24h, market_cap_change_percentage_24h) == 0 &&
+                Double.compare(that.circulating_supply, circulating_supply) == 0 &&
+                Double.compare(that.total_supply, total_supply) == 0 &&
+                Double.compare(that.max_supply, max_supply) == 0 &&
+                Double.compare(that.ath, ath) == 0 &&
+                Double.compare(that.ath_change_percentage, ath_change_percentage) == 0 &&
+                Double.compare(that.atl, atl) == 0 &&
+                Double.compare(that.atl_change_percentage, atl_change_percentage) == 0 &&
+                Double.compare(that.price_change_percentage_1h_in_currency, price_change_percentage_1h_in_currency) == 0 &&
+                Double.compare(that.price_change_percentage_24h_in_currency, price_change_percentage_24h_in_currency) == 0 &&
+                Double.compare(that.price_change_percentage_7d_in_currency, price_change_percentage_7d_in_currency) == 0 &&
+                Objects.equals(id, that.id) &&
+                Objects.equals(symbol, that.symbol) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(image, that.image) &&
+                Objects.equals(ath_date, that.ath_date) &&
+                Objects.equals(atl_date, that.atl_date) &&
+                Objects.equals(roi, that.roi) &&
+                Objects.equals(last_updated, that.last_updated);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, symbol, name, image, current_price, market_cap, market_cap_rank, fully_diluted_valuation, total_volume, high_24h, low_24h, price_change_24h, price_change_percentage_24h, market_cap_change_24h, market_cap_change_percentage_24h, circulating_supply, total_supply, max_supply, ath, ath_change_percentage, ath_date, atl, atl_change_percentage, atl_date, roi, last_updated, price_change_percentage_1h_in_currency, price_change_percentage_24h_in_currency, price_change_percentage_7d_in_currency);
+    }
+
+
+    public static DiffUtil.ItemCallback<MarketModel> itemCallback = new DiffUtil.ItemCallback<MarketModel>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull MarketModel oldItem, @NonNull MarketModel newItem) {
+            return oldItem.id.equals(newItem.id);
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull MarketModel oldItem, @NonNull MarketModel newItem) {
+            return oldItem.equals(newItem);
+        }
+    };
 }

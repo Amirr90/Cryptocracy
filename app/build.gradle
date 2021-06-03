@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.e.cryptocracy"
-        minSdkVersion 19
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -80,5 +80,15 @@ dependencies {
 
     //highChart
     implementation 'com.highsoft.highcharts:highcharts:8.1.2'
+
+
+
+    def paging_version = "3.0.0"
+
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
+    //Swipe refresh lay
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
 
 }

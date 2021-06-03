@@ -4,37 +4,37 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.e.cryptocracy.databinding.EventViewBinding
+import com.e.cryptocracy.databinding.DerivativeViewBinding
 import com.e.cryptocracy.interfaces.AdapterInterface
-import com.e.cryptocracy.model.responseModel.EventResponse
+import com.e.cryptocracy.model.DerivativeModel
 
 
-class EventsAdapter(
+class DerivativeAdapter(
     private
     val adapterInterface: AdapterInterface,
 ) :
-    RecyclerView.Adapter<EventsAdapter.HomeVH>() {
+    RecyclerView.Adapter<DerivativeAdapter.HomeVH>() {
 
     private val TAG = "EventsAdapter"
-    private var dataList: List<EventResponse.Event> = ArrayList()
+    private var dataList: List<DerivativeModel> = ArrayList()
 
-    class HomeVH(itemView: EventViewBinding) : RecyclerView.ViewHolder(itemView.root) {
-        val binding: EventViewBinding = itemView
+    class HomeVH(itemView: DerivativeViewBinding) : RecyclerView.ViewHolder(itemView.root) {
+        val binding: DerivativeViewBinding = itemView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeVH {
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val binding: EventViewBinding = EventViewBinding.inflate(inflater, parent, false)
+        val binding: DerivativeViewBinding = DerivativeViewBinding.inflate(inflater, parent, false)
         return HomeVH(binding)
     }
 
 
-    fun addItem(item: EventResponse.Event) {
+    fun addItem(item: DerivativeModel) {
         dataList += item
         notifyDataSetChanged()
     }
 
-    fun addItems(list: List<EventResponse.Event>) {
+    fun addItems(list: List<DerivativeModel>) {
         Log.d(TAG, "addItems: $list")
         dataList = list
         notifyDataSetChanged()
@@ -47,12 +47,12 @@ class EventsAdapter(
 
     override fun onBindViewHolder(holder: HomeVH, position: Int) {
 
-        val eventModel = dataList[position]
-        //eventModel.position = (position + 1).toString()
-        holder.binding.event = eventModel
+        val derivative = dataList[position]
+        derivative.position = (position + 1).toString()
+        holder.binding.derivative = derivative
 
 
-        holder.binding.mailEventLay.setOnClickListener {
+        holder.binding.mainDerivativeLay.setOnClickListener {
             adapterInterface.onItemClick(dataList[position])
         }
     }

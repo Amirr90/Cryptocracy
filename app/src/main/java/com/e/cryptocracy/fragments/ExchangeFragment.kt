@@ -56,7 +56,7 @@ class ExchangeFragment : Fragment(), AdapterInterface {
                 adapter.addItems(exchangeList)
             }
 
-            override fun onFailed(msg: String) {
+            override fun onFailed(msg: String?) {
 
             }
 

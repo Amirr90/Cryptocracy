@@ -74,6 +74,7 @@ class SplashScreen : AppCompatActivity() {
                     AppUtils.setValue(AppConstant.EVENT_COUNTRY, AppConstant.UNITED_STATE, this)
                     AppUtils.setValue(AppConstant.EVENT_COUNTRY_CODE, AppConstant.US, this)
                     AppUtils.setValue(AppConstant.EVENT_TYPE, AppConstant.EVENT, this)
+                    AppUtils.setValue(AppConstant.DERIVATIVE_TYPE, AppConstant.DerivativeType.ALL, this)
                     startActivity(Intent(this, SelectCurrencyActivity::class.java))
                     finish()
                 } catch (ex: Exception) {

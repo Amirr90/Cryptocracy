@@ -19,9 +19,12 @@ class MyAdapter(private val mContext: Context, fm: FragmentManager?, var totalTa
                 return FavouriteFragment()
             }
             2 -> {
-                return ExchangeFragment()
+                return TrendingCoinsFragment()
             }
             3 -> {
+                return ExchangeFragment()
+            }
+            4 -> {
                 return EventsFragment()
             }
 
@@ -34,7 +37,7 @@ class MyAdapter(private val mContext: Context, fm: FragmentManager?, var totalTa
     }
 
     override fun getCount(): Int {
-        return 5
+        return totalTabs
     }
 
     companion object {
@@ -43,6 +46,7 @@ class MyAdapter(private val mContext: Context, fm: FragmentManager?, var totalTa
             intArrayOf(
                 R.string.market,
                 R.string.favourite,
+                R.string.trending_coins,
                 R.string.exchanges,
                 R.string.events,
                 R.string.derivations

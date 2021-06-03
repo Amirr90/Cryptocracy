@@ -30,7 +30,8 @@ class HomeFragment : Fragment() {
     private val TAG = "HomeFragment"
     lateinit var binding: FragmentHomeBinding
     var navController: NavController? = null
-    lateinit var marketFragment: MarketFragment
+
+    lateinit var adapter: MyAdapter
 
 
     override fun onCreateView(
@@ -74,8 +75,7 @@ class HomeFragment : Fragment() {
             dialog.dismiss()
             AppUtils.setValue(AppConstant.SORT_ORDER, getData()[item], requireActivity())
             Log.d(TAG, "showFilterDialog: " + AppUtils.getValue(AppConstant.SORT_ORDER, activity))
-            marketFragment = MarketFragment()
-            marketFragment.setupMarketRec(1, "")
+
         }.show()
     }
 
@@ -110,6 +110,7 @@ class HomeFragment : Fragment() {
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 binding.viewPager.currentItem = tab.position
+
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {

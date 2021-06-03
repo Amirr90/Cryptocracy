@@ -9,18 +9,16 @@ import com.e.cryptocracy.databinding.MarketViewBinding
 import com.e.cryptocracy.interfaces.AdapterInterface
 import com.e.cryptocracy.interfaces.UpdateFavouriteCoinsListener
 import com.e.cryptocracy.model.MarketModel
-import com.e.cryptocracy.model.MarketModel.itemCallback
-import com.e.cryptocracy.utils.App
-import com.e.cryptocracy.utils.AppConstant
 import com.e.cryptocracy.utils.AppUtils
-import com.google.gson.Gson
 
-class MarketAdapter(
+
+class MarketFavAdapter
+    (
     private val adapterInterface: AdapterInterface,
-    private var favIds: List<String>,
+    private val favIds: List<String>,
 ) :
-    ListAdapter<MarketModel, MarketAdapter.VitalVH?>(itemCallback) {
-    private val TAG = "MarketAdapter"
+    ListAdapter<MarketModel, MarketFavAdapter.VitalVH?>(MarketModel.itemCallback) {
+    private val TAG = "MarketFavAdapter"
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VitalVH {
         val inflater = LayoutInflater.from(parent.context)
         val vitalViewBinding: MarketViewBinding = MarketViewBinding.inflate(inflater, parent, false)
@@ -42,22 +40,14 @@ class MarketAdapter(
             Log.d(TAG, "onBindViewHolder: " + coins.id)
             Log.d(TAG, "isChecked: " + holder.binding.checkBox.isChecked)
 
-
-
             AppUtils.updateFavCoins(coins.id, holder.binding.checkBox.isChecked, object :
                 UpdateFavouriteCoinsListener {
                 override fun onSuccess(obj: Any) {
-                    val msg = obj as String
-                    favIds = favIds + coins.id
-                    val gson = Gson()
-                    val json: String = gson.toJson(favIds)
-                    AppUtils.setValue(AppConstant.FAV_IDS, json, App.context)
-                    AppConstant.showToast(msg)
+                    notifyDataSetChanged()
                 }
 
                 override fun onFailed(msg: String?) {
-                    holder.binding.checkBox.isChecked = false
-                    AppConstant.showToast("try again !!")
+                    notifyDataSetChanged()
                 }
 
             })

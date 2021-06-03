@@ -68,7 +68,6 @@ class EventsFragment : Fragment(), AdapterInterface {
 
         binder.tvEvent.setOnClickListener {
             eventBuilder.show()
-
         }
     }
 
@@ -104,11 +103,11 @@ class EventsFragment : Fragment(), AdapterInterface {
 
             }
 
-            override fun onFailed(msg: String) {
+            override fun onFailed(msg: String?) {
                 val items = arrayOfNulls<CharSequence>(3)
                 items[0] = AppConstant.EventType.EVENT
-                items[0] = AppConstant.EventType.CONFERENCE
-                items[0] = AppConstant.EventType.MEETUP
+                items[1] = AppConstant.EventType.CONFERENCE
+                items[2] = AppConstant.EventType.MEETUP
 
                 eventBuilder.setTitle(R.string.select_event_type)
                 eventBuilder.setItems(items)
@@ -139,7 +138,7 @@ class EventsFragment : Fragment(), AdapterInterface {
                 initEventData()
             }
 
-            override fun onFailed(msg: String) {
+            override fun onFailed(msg: String?) {
 
             }
 
@@ -214,7 +213,7 @@ class EventsFragment : Fragment(), AdapterInterface {
 
             }
 
-            override fun onFailed(msg: String) {
+            override fun onFailed(msg: String?) {
                 Log.d(TAG, "onFailed: $msg")
                 AppConstant.showToast("try again !! ")
             }

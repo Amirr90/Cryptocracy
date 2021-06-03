@@ -4,37 +4,32 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.e.cryptocracy.databinding.EventViewBinding
+import com.e.cryptocracy.databinding.TrendingCoinViewBinding
 import com.e.cryptocracy.interfaces.AdapterInterface
-import com.e.cryptocracy.model.responseModel.EventResponse
+import com.e.cryptocracy.model.responseModel.TrendingCoinResponse
 
 
-class EventsAdapter(
+class TrendingCoinsAdapter(
     private
     val adapterInterface: AdapterInterface,
 ) :
-    RecyclerView.Adapter<EventsAdapter.HomeVH>() {
+    RecyclerView.Adapter<TrendingCoinsAdapter.HomeVH>() {
 
     private val TAG = "EventsAdapter"
-    private var dataList: List<EventResponse.Event> = ArrayList()
+    private var dataList: List<TrendingCoinResponse.Coins> = ArrayList()
 
-    class HomeVH(itemView: EventViewBinding) : RecyclerView.ViewHolder(itemView.root) {
-        val binding: EventViewBinding = itemView
+    class HomeVH(itemView: TrendingCoinViewBinding) : RecyclerView.ViewHolder(itemView.root) {
+        val binding: TrendingCoinViewBinding = itemView
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeVH {
         val inflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val binding: EventViewBinding = EventViewBinding.inflate(inflater, parent, false)
+        val binding: TrendingCoinViewBinding =
+            TrendingCoinViewBinding.inflate(inflater, parent, false)
         return HomeVH(binding)
     }
 
-
-    fun addItem(item: EventResponse.Event) {
-        dataList += item
-        notifyDataSetChanged()
-    }
-
-    fun addItems(list: List<EventResponse.Event>) {
+    fun addItems(list: List<TrendingCoinResponse.Coins>) {
         Log.d(TAG, "addItems: $list")
         dataList = list
         notifyDataSetChanged()
@@ -47,12 +42,11 @@ class EventsAdapter(
 
     override fun onBindViewHolder(holder: HomeVH, position: Int) {
 
-        val eventModel = dataList[position]
-        //eventModel.position = (position + 1).toString()
-        holder.binding.event = eventModel
+        val coinModel = dataList[position]
+        holder.binding.coinModel = coinModel
 
 
-        holder.binding.mailEventLay.setOnClickListener {
+        holder.binding.mainDerivativeLay.setOnClickListener {
             adapterInterface.onItemClick(dataList[position])
         }
     }

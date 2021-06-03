@@ -28,8 +28,6 @@ class ExchangeAdapter(
 
 
     fun addItem(item: ExchangeModel) {
-        if (null == dataList)
-            dataList = ArrayList()
         dataList += item
         notifyDataSetChanged()
     }

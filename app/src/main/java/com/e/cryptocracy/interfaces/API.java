@@ -2,10 +2,12 @@ package com.e.cryptocracy.interfaces;
 
 import com.e.cryptocracy.model.CoinModel;
 import com.e.cryptocracy.model.CountryList;
+import com.e.cryptocracy.model.DerivativeModel;
 import com.e.cryptocracy.model.EventTypeModel;
 import com.e.cryptocracy.model.ExchangeModel;
 import com.e.cryptocracy.model.MarketModel;
 import com.e.cryptocracy.model.responseModel.EventResponse;
+import com.e.cryptocracy.model.responseModel.TrendingCoinResponse;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,7 +28,6 @@ public interface API {
     @GET("api/v3/coins/markets")
     Call<List<MarketModel>> coinMarketData(@Query("vs_currency") @NotNull String vsCurrency,
                                            @Query("ids") @Nullable String id,
-                                           @Query("category") @NotNull String category,
                                            @Query("order") @NotNull String order,
                                            @Query("per_page") int perPage,
                                            @Query("page") @Nullable Integer page,
@@ -83,6 +84,12 @@ public interface API {
             @Query("page") int perPage,
             @Query("upcoming_events_only") boolean upcomingEventsOnly);
 
+    @GET("api/v3/derivatives")
+    Call<List<DerivativeModel>> derivativeData(
+            @Query("include_tickers") @NotNull String includeTickers);
+
+    @GET("api/v3/search/trending")
+    Call<TrendingCoinResponse> loadTendingCoinData();
 }
 
 

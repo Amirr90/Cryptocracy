@@ -20,6 +20,7 @@ import android.widget.TextView;
 import androidx.fragment.app.FragmentActivity;
 
 import com.e.cryptocracy.R;
+import com.e.cryptocracy.interfaces.UpdateFavouriteCoinsListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -98,6 +99,13 @@ public class AppUtils {
     }
 
     public static void setValue(String key, String value, Activity activity) {
+        SharedPreferences sharedpreferences = activity.getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(key, value);
+        editor.apply();
+    }
+
+    public static void setValue(String key, String value, Context activity) {
         SharedPreferences sharedpreferences = activity.getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putString(key, value);
@@ -228,17 +236,17 @@ public class AppUtils {
 
     public static void showRequestDialog(Context activity) {
 
-        //Log.d("Token-Number", AppSettings.getString(AppSettings.token));
-
         try {
             if (!((Activity) activity).isFinishing()) {
                 progressDialog = ProgressDialog.show(activity, null, null, false, true);
                 progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(activity.getResources().getColor(android.R.color.transparent)));
                 progressDialog.setContentView(R.layout.progress_bar);
                 progressDialog.show();
+
             }
         } catch (Exception e) {
             e.printStackTrace();
+
         }
 
     }
@@ -265,5 +273,22 @@ public class AppUtils {
             e.printStackTrace();
             return "";
         }
+    }
+
+    public static void updateFavCoins(String id, boolean checked, @NotNull UpdateFavouriteCoinsListener updateFavouriteCoinsListener) {
+        if (!isNetworkConnected(App.context)) {
+            AppConstant.showToast("No Internet");
+            return;
+        }
+        Log.d(TAG, "getUid: " + getUid());
+        Log.d(TAG, "checked: " + checked);
+        Log.d(TAG, "id: " + id);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("coinId", id);
+        if (checked)
+            getFireStoreReference().collection(AppConstant.USERS).document(getUid()).collection(AppConstant.FAVOURITE).document(id).set(map).addOnSuccessListener(obj -> updateFavouriteCoinsListener.onSuccess("Added !!")).addOnFailureListener(e -> updateFavouriteCoinsListener.onFailed(e.getLocalizedMessage()));
+        else
+            getFireStoreReference().collection(AppConstant.USERS).document(getUid()).collection(AppConstant.FAVOURITE).document(id).delete().addOnSuccessListener(obj -> updateFavouriteCoinsListener.onSuccess("Removed !!")).addOnFailureListener(e -> updateFavouriteCoinsListener.onFailed(e.getLocalizedMessage()));
     }
 }

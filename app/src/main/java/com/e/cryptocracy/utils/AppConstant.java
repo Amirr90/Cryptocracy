@@ -23,7 +23,7 @@ public class AppConstant {
     public static final String COIN_ID = "coin_id";
     @Nullable
     public static final String PRICE = "price";
-    public static final int PER_PAGE_COINS_DATA = 200;
+    public static final int PER_PAGE_COINS_DATA = 30;
     @Nullable
     public static final String COIN_NAME = "name";
     @Nullable
@@ -40,6 +40,12 @@ public class AppConstant {
     public static final String EVENT_TYPE = "event_type";
     @Nullable
     public static final String EVENT = "Event";
+    @Nullable
+    public static final String DERIVATIVE_TYPE = "derivative_type";
+    @NotNull
+    public static final String FAVOURITE = "Favourite";
+    @Nullable
+    public static final String FAV_IDS = "fav_ids";
 
     public static void showToast(@NotNull String s) {
         Toast.makeText(App.context, s, Toast.LENGTH_SHORT).show();
@@ -52,5 +58,13 @@ public class AppConstant {
         public static final String CONFERENCE = "Conference";
         @Nullable
         public static final String MEETUP = "Meetup";
+    }
+
+    public class DerivativeType {
+        @Nullable
+        public static final String ALL = "all";
+        @Nullable
+        public static final String UNEXPIRED = "unexpired";
+
     }
 }

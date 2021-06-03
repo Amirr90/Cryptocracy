@@ -64,7 +64,7 @@ class PriceChartFragment(var id: String, var price: Double) : Fragment() {
                 binding.tvCurrency.text = AppUtils.getValue(AppConstant.CURRENCY, requireActivity())
             }
 
-            override fun onFailed(msg: String) {
+            override fun onFailed(msg: String?) {
                 AppConstant.showToast(getString(R.string.try_again))
                 AppUtils.hideDialog()
             }
@@ -132,7 +132,7 @@ class PriceChartFragment(var id: String, var price: Double) : Fragment() {
 
             }
 
-            override fun onFailed(msg: String) {
+            override fun onFailed(msg: String?) {
                 Log.d(TAG, "onFailed: $msg")
             }
 

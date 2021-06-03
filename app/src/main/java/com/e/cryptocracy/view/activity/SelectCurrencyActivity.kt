@@ -69,7 +69,7 @@ class SelectCurrencyActivity : AppCompatActivity(), AdapterInterface {
 
                 }
 
-                override fun onFailed(msg: String) {
+                override fun onFailed(msg: String?) {
                     AppUtils.hideDialog()
                     Log.d(TAG, "onFailed: $msg")
                 }
